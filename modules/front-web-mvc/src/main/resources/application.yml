@@ -1,0 +1,82 @@
+spring.application.name: front-web-mvc
+server:
+  port: 8080
+  forward-headers-strategy: FRAMEWORK
+spring.main.banner-mode: off
+
+## ログレベル
+logging.level:
+  com.example: DEBUG
+  org.springframework.web.client.RestTemplate: DEBUG
+  org.springframework.security.web.authentication.logout: DEBUG
+
+## ログファイル
+#logging:
+#  file.name: /var/log/${spring.application.name}.log
+#  logback:
+#    rollingpolicy:
+#      file-name-pattern: ${LOG_FILE}.%d{yyyyMMddHH}.%i.log
+#      max-file-size: 100KB
+#      max-history: 7
+
+## サービス情報
+services:
+  auth:
+    base-url: http://localhost:18080/auth
+#  hello:
+#    base-url: http://localhost:8081/api/v1
+#    client-registration-id: publicapp
+
+## thymeleaf
+spring.thymeleaf:
+  mode: HTML
+
+## メッセージ
+spring.messages:
+  basename: i18n.messages
+  cache-duration: -1
+
+## DataSource(Postgres)
+spring.datasource:
+  driverClassName: org.postgresql.Driver
+  url: jdbc:postgresql://localhost:5432/demo
+  username: postgres
+  password: postgres
+
+## Flyway
+spring.flyway:
+  enabled: true
+  baseline-on-migrate: true
+
+## MyBatis
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+
+## Spring Security (OAuth2クライアント)
+spring.security.oauth2.client:
+  registration:
+    demoapp:
+      provider: keycloak
+      client-id: demoapp
+      client-secret: 08c33835-c18c-4dd7-a7df-aee3479d17c4
+      scope: openid, profile, email
+  provider:
+    keycloak:
+      issuer-uri: ${services.auth.base-url}/realms/demo
+
+## Spring Boot Actuator
+management:
+  endpoints.web.base-path: /manage
+  endpoints.enabled-by-default: false
+  endpoint.health.enabled: true
+
+## 
+server.servlet:
+  context-path: /app
+  session.cookie:
+    name: SID
+    path: ${server.servlet.context-path}/
+  #spring.webflux.base-path: /api/v1
+#server.servlet.session.cookie.max-age: 1m
+#spring.session.timeout: 240

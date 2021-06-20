@@ -1,0 +1,28 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <title>Error</title>
+</head>
+
+<body>
+    <h1>システムエラー</h1>
+
+    <ul>
+        <li>status: [[${status}]]</li>
+        <li>error : [[${error}]]</li>
+        <li>exception : [[${exception}]]</li>
+        <li>message : [[${message}]]</li>
+        <li>errors : [[${errors}]]</li>
+        <li>path : [[${path}]]</li>
+    </ul>
+
+    <form th:action="@{/}">
+        <button>トップ</button>
+    </form>
+</body>
+
+</html>

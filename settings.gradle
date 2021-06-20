@@ -1,0 +1,3 @@
+rootProject.name = 'study-web-mvc-and-flux'
+include ":modules:front-web-mvc", ":modules:front-web-flux"
+
