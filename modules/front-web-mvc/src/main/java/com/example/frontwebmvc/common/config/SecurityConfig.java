@@ -15,7 +15,6 @@ import org.springframework.security.oauth2.client.web.DefaultOAuth2Authorization
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestResolver;
 import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
 import org.springframework.security.web.access.ExceptionTranslationFilter;
-import org.springframework.security.web.authentication.ForwardAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
@@ -41,6 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // @formatter:off
         http.authorizeRequests()
             .antMatchers("/").permitAll()
+            .antMatchers("/loginerror").permitAll()
             .antMatchers("/manage/**").permitAll()
             .anyRequest().authenticated();        
         // @formatter:on
@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // OAuth2 ログイン
         // @formatter:off
         http.oauth2Login(oauth2 -> oauth2
-            .failureHandler(new SimpleUrlAuthenticationFailureHandler("/?login-error"))
+            .failureHandler(new SimpleUrlAuthenticationFailureHandler("/loginerror"))
             .authorizationEndpoint(authorization -> authorization
                 .authorizationRequestResolver(authorizationRequestResolver(clientRegistrationRepository))));
         // @formatter:on
