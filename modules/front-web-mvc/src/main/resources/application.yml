@@ -69,7 +69,13 @@ spring.security.oauth2.client:
 management:
   endpoints.web.base-path: /manage
   endpoints.enabled-by-default: false
-  endpoint.health.enabled: true
+  endpoint.health:
+    enabled: true
+    show-details: ALWAYS
+  health:
+#    defaults.enabled: false 
+    ping.enabled: true
+#    db.enabled: true
 
 ## 
 server.servlet:
